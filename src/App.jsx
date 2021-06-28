@@ -9,7 +9,7 @@ export function App() {
   return (
     <Fragment>
       <TodoList todos={todos} />
-      <input type="text" />
+      <input type="text" placeholder="Nueva tarea" />
       <button>Añadir</button>
       <button>Eliminar</button>
     </Fragment>
