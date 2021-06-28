@@ -1,12 +1,25 @@
-import React, { Fragment, useState, useRef } from "react";
+import React, { Fragment, useState, useRef, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TodoList } from "./components/TodoList";
+
+const KEY = "todoApp.todos";
 
 export function App() {
   const todoTaskRef = useRef();
   const [todos, setTodos] = useState([
     { id: 1, task: "Tarea ", completed: false },
   ]);
+
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem(KEY));
+    if (storedTodos) {
+      setTodos(storedTodos);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(KEY, JSON.stringify(todos));
+  }, [todos]);
 
   const toggleTodo = (id) => {
     const newTodos = [...todos];
