@@ -8,6 +8,13 @@ export function App() {
     { id: 1, task: "Tarea ", completed: false },
   ]);
 
+  const toggleTodo = (id) => {
+    const newTodos = [...todos];
+    const todo = newTodos.find((todo) => todo.id === id);
+    todo.completed = !todo.completed;
+    setTodos(newTodos);
+  };
+
   const handleTodoAdd = (event) => {
     const task = todoTaskRef.current.value;
     if (task === "") return;
@@ -21,7 +28,7 @@ export function App() {
 
   return (
     <Fragment>
-      <TodoList todos={todos} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} />
       <input ref={todoTaskRef} type="text" placeholder="Nueva tarea" />
       <button onClick={handleTodoAdd}>Añadir</button>
       <button>Eliminar</button>
