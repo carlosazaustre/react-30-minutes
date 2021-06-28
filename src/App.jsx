@@ -26,12 +26,21 @@ export function App() {
     todoTaskRef.current.value = null;
   };
 
+  const handleClearAll = () => {
+    const newTodos = todos.filter((todo) => !todo.completed);
+    setTodos(newTodos);
+  };
+
   return (
     <Fragment>
       <TodoList todos={todos} toggleTodo={toggleTodo} />
       <input ref={todoTaskRef} type="text" placeholder="Nueva tarea" />
       <button onClick={handleTodoAdd}>Añadir</button>
-      <button>Eliminar</button>
+      <button onClick={handleClearAll}>Eliminar</button>
+      <div>
+        Te quedan {todos.filter((todo) => !todo.completed).length} tareas por
+        terminar
+      </div>
     </Fragment>
   );
 }
